@@ -27,7 +27,7 @@ public class HomePageTest extends Base {
 	 //boolean isDashboardDisplayed=loginPage.isDashBoardDisplayed();
 	  assertEquals(driver.getTitle(), "Dashboard | 7rmart supermarket",Constant.ERRORMESSAGE); //getting title and comparing with given value
 	  homePage.logoutAction("Logout");
-	  assertEquals(driver.getTitle(), "Login | 7rmart supermarket", "User not logged out"); 
+	  assertEquals(driver.getTitle(), "Login | 7rmart supermarket", Constant.NOTLOGGEDOUTERRORMESSAGE); 
 	  
 	  
   }

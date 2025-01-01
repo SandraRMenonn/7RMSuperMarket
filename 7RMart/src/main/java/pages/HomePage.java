@@ -19,13 +19,14 @@ public class HomePage {
 		PageFactory.initElements(driver, this);
 	}
 	
-	//@FindBy(xpath="//li[@class='nav-item dropdown']")
 	@FindBy(xpath="//a[@data-toggle='dropdown']")
 	WebElement settingsandLogoutdropdown;
 	@FindBy(xpath="//a[@class='dropdown-item'][2]")
 	WebElement logoutOption;
 	@FindBy(xpath="//i[@class='fas fa-arrow-circle-right'][1]")
 	WebElement adminUserMoreInfo;
+	@FindBy(xpath="//img[@alt='AdminLTE Logo']")
+	WebElement homeLogo;
 	
 	
 	
@@ -38,7 +39,6 @@ public class HomePage {
 		settingsandLogoutdropdown.click();
 		
 		WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10)); //explicit wait added to wait until logout option visible
-		// wait.until(ExpectedConditions.elementToBeClickable(logoutOption)); 
 		logoutOption.click();
 		return new LoginPage(driver);
 	}

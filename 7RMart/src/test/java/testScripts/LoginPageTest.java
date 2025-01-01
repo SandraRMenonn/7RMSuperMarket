@@ -44,19 +44,19 @@ public class LoginPageTest extends Base{
 	  LoginPage loginPage=new LoginPage(driver);
 	  String username=ExcelUtility.readStringData(2, 0, "LoginPage");
 	  String password=ExcelUtility.readStringData(2, 1, "LoginPage");
-	  loginPage.signIn("admin", "&^&");
+	  loginPage.signIn(username, password);
 	  loginPage.clickSignIn();
 	  System.out.println(loginPage.isInvalidUsernameAlertDisplayed());
 	  loginPage.loginInputfieldsClear();
   }
 	
-  @Test(dataProvider="Credentials")
-	  public void validCredentialsforLogin(String username, String password) {
+  @Test(dataProvider="Credentials") //Parameterization
+	  public void validCredentialsforLogin() throws IOException {
 	  /*******Valid credentials*******/
 	  LoginPage loginPage=new LoginPage(driver);
-	 // String validusername=ExcelUtility.readStringData(2, 0, "LoginPage");
-	  //String validpassword=ExcelUtility.readStringData(2, 1, "LoginPage");
-	  loginPage.signIn(username, password);
+	  String validusername=ExcelUtility.readStringData(3, 0, "LoginPage");
+	  String validpassword=ExcelUtility.readStringData(3, 1, "LoginPage");
+	  loginPage.signIn(validusername, validpassword);
 	  //loginPage.rememberMe();
 	  loginPage.clickSignIn();
 	  //loginPage.passwordAlert();
