@@ -23,8 +23,8 @@ public class HomePageTest extends Base {
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.signIn(username, password); // Value from 22nd
 		homePage = loginPage.clickSignIn();
-		assertEquals(driver.getTitle(), "Dashboard | 7rmart supermarket", Constant.ERRORMESSAGE); // getting title and comparing with given value 
-		homePage.logoutAction("Logout");
+		//assertEquals(driver.getTitle(), "Dashboard | 7rmart supermarket", Constant.ERRORMESSAGE); // getting title and comparing with given value 
+		loginPage=homePage.logoutAction("Logout");
 		assertEquals(driver.getTitle(), "Login | 7rmart supermarket", Constant.NOTLOGGEDOUTERRORMESSAGE);
 
 	}

@@ -10,9 +10,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import utility.WaitUtility;
+
 public class HomePage {
 
 	public WebDriver driver;
+	
 
 	public HomePage(WebDriver driver) {
 		this.driver = driver;
@@ -41,14 +44,15 @@ public class HomePage {
 
 	public LoginPage logoutAction(String dropdownValue) {
 		settingsandLogoutdropdown.click();
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // explicit wait added to wait until
-																				// logout option visible
+		WaitUtility waitUtilityPage=new WaitUtility();
+		waitUtilityPage.waitForElementToBeClickable(driver, logoutOption);  // explicit wait added to wait until logout option visible
 		logoutOption.click();
 		return new LoginPage(driver);
 	}
 
 	public AdminUsersPage clickAdminUserMoreInfo() {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WaitUtility waitUtilityPage=new WaitUtility();
+		waitUtilityPage.waitForElementToBeClickable(driver, adminUserMoreInfo);
 		adminUserMoreInfo.click();
 		return new AdminUsersPage(driver);
 	}

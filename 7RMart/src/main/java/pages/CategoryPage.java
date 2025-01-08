@@ -20,6 +20,8 @@ import utility.WaitUtility;
 public class CategoryPage {
 
 	public WebDriver driver;
+	//WaitUtility waitUtilityPage=new WaitUtility();
+	PageUtility pageUtility=new PageUtility();
 
 	public CategoryPage(WebDriver driver) {
 		this.driver = driver;
@@ -37,27 +39,42 @@ public class CategoryPage {
 	@FindBy(xpath = "//input[@class='form-control']")
 	WebElement categorySearchField;
 	@FindBy(xpath = "//button[@name='Search']")
-	WebElement categorySearchButton;
+	WebElement searchButtonToSubmitCategorySearch;
 	@FindBy(xpath = "//a[@class='page-link']")
 	WebElement categorySearchResultPagination;
 	@FindBy(xpath = "//i[@class='fas fa-trash-alt']")
 	WebElement deleteCategoryFromSearchResult;
+	@FindBy(xpath = "//a[@class='btn btn-rounded btn-danger']")
+	WebElement categoryNewButton;
+	@FindBy(xpath = "//div[@class='alert alert-success alert-dismissible']")
+	WebElement saveandDeleteSuccessAlert;
+	@FindBy(xpath = "//a[@class='btn btn-rounded btn-primary']")
+	WebElement categorySearchButton;
 
 	public CategoryPage addNewCategory(String categoryName, String filePath) {
 		enterCategoryField.sendKeys(categoryName);
 		selectGroups.click();
 		chooseFileButton.sendKeys(filePath);
 		WaitUtility waitUtilityPage=new WaitUtility();
-		waitUtilityPage.waitForElementToBeClickable(driver, saveAfterCategoryimageupload);
-		PageUtility pageUtility=new PageUtility();
-		pageUtility.javaScriptExecutorToScrollDown();
+		waitUtilityPage.waitForElementToBeClickable(driver, saveAfterCategoryimageupload); 
+	   // PageUtility pageUtility=new PageUtility();
+		//pageUtility.javaScriptExecutorToScrollDown(3000);
+		JavascriptExecutor exe = (JavascriptExecutor) driver;   
+		exe.executeScript("window.scrollBy(0,3000)"); // scroll down
+		try {
+			Thread.sleep(2000);
+		} // 2-second pause }
+		catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		saveAfterCategoryimageupload.click();
 		return this;
 	}
 
 	public boolean categorySearch(String categoryName) {
-		categorySearchField.sendKeys(categoryName);
 		categorySearchButton.click();
+		categorySearchField.sendKeys(categoryName);
+		searchButtonToSubmitCategorySearch.click();
 		boolean isPaginationDisplayed = categorySearchResultPagination.isDisplayed();
 		System.out.println("Search result pagination displayed: " + isPaginationDisplayed);
 		return isPaginationDisplayed;
@@ -74,4 +91,17 @@ public class CategoryPage {
 		driver.switchTo().alert().accept();
 		return this;
 	}
+	
+	public CategoryPage newButtonClick() {
+		WaitUtility waitUtilityPage=new WaitUtility();
+		waitUtilityPage.waitForElementToBeClickable(driver, categoryNewButton);
+		categoryNewButton.click();
+		return this;
+	}
+	
+	public boolean isSaveandDeleteSuccess() {
+		PageUtility pageUtility = new PageUtility();
+		return pageUtility.isSaveandDeleteSuccess(saveandDeleteSuccessAlert);
+	}
+	
 }

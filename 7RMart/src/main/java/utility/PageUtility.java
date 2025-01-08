@@ -1,9 +1,13 @@
 package utility;
 
+import java.time.Duration;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PageUtility {
 	
@@ -17,10 +21,10 @@ public class PageUtility {
 
 	//add fw more methods
 	
-	public void javaScriptExecutorToScrollDown()
+	public void javaScriptExecutorToScrollDown(int pixels)
 	{
 		JavascriptExecutor exe = (JavascriptExecutor) driver;   
-		exe.executeScript("window.scrollBy(0,3000)"); // scroll down
+		exe.executeScript("window.scrollBy(0," +pixels+")"); // scroll down
 		try {
 			Thread.sleep(2000);
 		} // 2-second pause }
@@ -28,4 +32,12 @@ public class PageUtility {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	public boolean isSaveandDeleteSuccess(WebElement SaveandDeleteSuccessAlertElement) {
+		boolean isSaveorDeleteSuccess = SaveandDeleteSuccessAlertElement.isDisplayed();
+		System.out.println("Is Save or Delete success:" + isSaveorDeleteSuccess);
+		return isSaveorDeleteSuccess;
+	}
+	
 }

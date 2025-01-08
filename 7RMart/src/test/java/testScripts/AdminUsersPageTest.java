@@ -14,6 +14,7 @@ import pages.HomePage;
 import pages.LoginPage;
 import utility.ExcelUtility;
 import utility.FakerUtility;
+import utility.PageUtility;
 import testScripts.Base;
 
 public class AdminUsersPageTest extends Base {
@@ -37,7 +38,8 @@ public class AdminUsersPageTest extends Base {
 		adminUsersPage.inputAdminUsernameandPassword(adminUsername, adminpassword);
 		adminUsersPage.selectAdminUserType(adminUserType);
 		adminUsersPage.clickSaveAdminUserInfo();
-		assertTrue(adminUsersPage.isAdminUserInfoSaveandDeleteSuccess(), Constant.MESSAGEFORFAILEDSAVEORDELETE);
+		assertTrue(adminUsersPage.isSaveandDeleteSuccess(),Constant.MESSAGEFORFAILEDSAVEORDELETE);
+		
 
 	}
 
@@ -47,12 +49,10 @@ public class AdminUsersPageTest extends Base {
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.signIn(username, password);
 		homePage = loginPage.clickSignIn();
-		homePage.clickAdminUserMoreInfo();
-		//assertEquals(driver.getTitle(), "Admin Users | 7rmart supermarket", Constant.ADMINUSERPAGENOTDISPLAYEDMESSAGE);
-		adminUsersPage.searchAdminUser();
+		adminUsersPage=homePage.clickAdminUserMoreInfo();
 		String adminUsername = ExcelUtility.readStringData(1, 0, "AdminUserPage");
-		String adminUserPassword = ExcelUtility.readStringData(1, 1, "AdminUserPage");
-		adminUsersPage.inputAdminSearchUserName_UserType(adminUsername, adminUserPassword); //add assertion
+		String adminUserType = ExcelUtility.readStringData(1, 2, "AdminUserPage");
+		assertTrue(adminUsersPage.searchAdminUser(adminUsername, adminUserType));
 	}
 
 	@Test
@@ -61,9 +61,8 @@ public class AdminUsersPageTest extends Base {
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.signIn(username, password);
 		homePage = loginPage.clickSignIn();
-		homePage.clickAdminUserMoreInfo();
+		adminUsersPage=homePage.clickAdminUserMoreInfo();
 		adminUsersPage.deleteAdminUser();
-		assertTrue(adminUsersPage.isAdminUserInfoSaveandDeleteSuccess(), Constant.MESSAGEFORFAILEDSAVEORDELETE);
-		;
+		assertTrue(adminUsersPage.isSaveandDeleteSuccess(), Constant.MESSAGEFORFAILEDSAVEORDELETE);
 	}
 }

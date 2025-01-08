@@ -13,18 +13,20 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import utility.PageUtility;
+import utility.WaitUtility;
 
 public class AdminUsersPage {
 
 	public WebDriver driver;
 	PageUtility pageUtility = new PageUtility();
+	WaitUtility waitUtility=new WaitUtility();
 
 	public AdminUsersPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(xpath = "//a[@onclick='click_button(1)']")
+	@FindBy(xpath = "//a[@class='btn btn-rounded btn-danger']")
 	WebElement adminUserNewButton;
 	@FindBy(xpath = "//input[@id='username']")
 	WebElement inputAdminUserName;
@@ -35,10 +37,10 @@ public class AdminUsersPage {
 	@FindBy(xpath = "//button[@name='Create']")
 	WebElement saveAdminUserInfo;
 	@FindBy(xpath = "//div[@class='alert alert-success alert-dismissible']")
-	WebElement AdminUserInfoSaveandDeleteSuccessAlert;
+	WebElement SaveandDeleteSuccessAlert;
 	@FindBy(xpath = "//i[@class='fas fa-trash-alt'][1]")
 	WebElement deleteAdminUserIcon;
-	@FindBy(xpath = "//a[@onclick='click_button(2)']")
+	@FindBy(xpath = "//a[@class='btn btn-rounded btn-primary']")
 	WebElement adminUserSearchButton;
 	@FindBy(xpath = "//input[@id='un']")
 	WebElement adminSearchUserName;
@@ -50,7 +52,7 @@ public class AdminUsersPage {
 	WebElement adminUserSearchresultPagination;
 
 	public AdminUsersPage newButtonClick() {
-
+		waitUtility.waitForElementToBeClickable(driver, adminUserNewButton);
 		adminUserNewButton.click();
 		return this;
 	}
@@ -62,10 +64,6 @@ public class AdminUsersPage {
 	}
 
 	public AdminUsersPage selectAdminUserType(String usertype) {
-
-		// Select selectAdminUserType=new Select(selectAdminUserTypeDropdown);
-		// selectAdminUserType.selectByVisibleText(usertype);
-
 		pageUtility.selectByVisibleText(selectAdminUserTypeDropdown, usertype);
 		return this;
 	}
@@ -75,31 +73,30 @@ public class AdminUsersPage {
 		return this;
 	}
 
-	public boolean isAdminUserInfoSaveandDeleteSuccess() {
-		boolean isSaveorDeleteSuccess = AdminUserInfoSaveandDeleteSuccessAlert.isDisplayed();
-		System.out.println("Is Save or Delete success:" + isSaveorDeleteSuccess);
-		return isSaveorDeleteSuccess;
-	}
-
 	public AdminUsersPage deleteAdminUser() {
 		deleteAdminUserIcon.click();
 		driver.switchTo().alert().accept();
 		return this;
 	}
 
-	public AdminUsersPage searchAdminUser() {
+	public boolean searchAdminUser(String username, String userType) {
+		WaitUtility waitUtility=new WaitUtility();
+		waitUtility.waitForElementToBeClickable(driver, adminUserSearchButton);
 		adminUserSearchButton.click();
-		return this;
-	}
-
-	public AdminUsersPage inputAdminSearchUserName_UserType(String username, String userType) {
 		adminSearchUserName.sendKeys(username);
 		pageUtility.selectByVisibleText(adminSearchUserTypeDropdown, userType);
 		adminUserSearchSubmitButton.click();
 		boolean isPaginationDisplayed = adminUserSearchresultPagination.isDisplayed();
 		System.out.println("Search result pagination displayed: " + isPaginationDisplayed);
-		return this;
+		return isPaginationDisplayed;
 
 	}
+	
+	public boolean isSaveandDeleteSuccess() {
+		return pageUtility.isSaveandDeleteSuccess(SaveandDeleteSuccessAlert);
+	}
+	
+	
+	
 
 }

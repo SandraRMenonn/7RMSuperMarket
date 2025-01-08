@@ -5,7 +5,7 @@
 <parameter name="ValidPassword" value="admin"></parameter>
   <test thread-count="5" name="Test">
    <classes>
-  	  		<class name="testScripts.AdminUsersPageTest"/> 
+  	  		<class name="testScripts.ManageNewsTest"/> 
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

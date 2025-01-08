@@ -3,18 +3,17 @@
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <parameter name="ValidPassword" value="admin"/>
   <parameter name="ValidUsername" value="admin"/>
-  <listeners>
-    <listener class-name="generateReport.Listeners"/>
-  </listeners>
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="testScripts.AdminUsersPageTest">
+      <class name="testScripts.CategoryTest">
         <methods>
+          <include name="verifyCategorySearch" invocation-numbers="0"/>
           <include name="afterMethod"/>
+          <include name="verifyDeleteCategoryfromSearchResult" invocation-numbers="0"/>
+          <include name="verifyCreateNewCategory" invocation-numbers="0"/>
           <include name="beforeMethod"/>
-          <include name="adminUserSearch" invocation-numbers="0"/>
         </methods>
-      </class> <!-- testScripts.AdminUsersPageTest -->
+      </class> <!-- testScripts.CategoryTest -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

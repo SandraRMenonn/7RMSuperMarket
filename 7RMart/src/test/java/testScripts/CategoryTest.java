@@ -29,13 +29,13 @@ public class CategoryTest extends Base {
 	public void verifyCreateNewCategory(String username, String password) throws IOException {
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.signIn(username, password);
-		loginPage.clickSignIn();
-		homePage.clickCategoryMoreInfo();
-		adminUsersPage.newButtonClick();
+		homePage=loginPage.clickSignIn();
+		categoryPage=homePage.clickCategoryMoreInfo();
+		categoryPage.newButtonClick();
 		String categoryName = ExcelUtility.readStringData(1, 0, "CategoryInfo");
 		String categoryFilePath = ExcelUtility.readStringData(1, 1, "CategoryInfo");
 		categoryPage.addNewCategory(categoryName, categoryFilePath);
-		assertTrue(adminUsersPage.isAdminUserInfoSaveandDeleteSuccess(), Constant.MESSAGEFORFAILEDSAVEORDELETE);
+		assertTrue(categoryPage.isSaveandDeleteSuccess(), Constant.MESSAGEFORFAILEDSAVEORDELETE);
 	}
 
 	@Test(priority = 2)
@@ -43,9 +43,8 @@ public class CategoryTest extends Base {
 	public void verifyCategorySearch(String username, String password) throws IOException {
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.signIn(username, password);
-		loginPage.clickSignIn();
-		homePage.clickCategoryMoreInfo();
-		adminUsersPage.searchAdminUser();
+		homePage=loginPage.clickSignIn();
+		categoryPage=homePage.clickCategoryMoreInfo();
 		String categoryName = ExcelUtility.readStringData(1, 0, "CategoryInfo");
 		categoryPage.categorySearch(categoryName);
 		System.out.println(categoryPage.searchResultGetText(categoryName) + " and " + categoryName);
@@ -57,13 +56,12 @@ public class CategoryTest extends Base {
 	public void verifyDeleteCategoryfromSearchResult(String username, String password) throws IOException {
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.signIn(username, password);
-		loginPage.clickSignIn();
-		homePage.clickCategoryMoreInfo();
-		adminUsersPage.searchAdminUser();
+		homePage=loginPage.clickSignIn();
+		categoryPage=homePage.clickCategoryMoreInfo();
 		String categoryName = ExcelUtility.readStringData(1, 0, "CategoryInfo");
 		categoryPage.categorySearch(categoryName);
 		categoryPage.deleteFromCategorySearchResult();
-		assertTrue(adminUsersPage.isAdminUserInfoSaveandDeleteSuccess(), Constant.MESSAGEFORFAILEDSAVEORDELETE);
+		assertTrue(categoryPage.isSaveandDeleteSuccess(), Constant.MESSAGEFORFAILEDSAVEORDELETE);
 
 	}
 

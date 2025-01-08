@@ -20,18 +20,19 @@ public class ManageNewsTest extends Base {
 	public HomePage homePage;
 	public AdminUsersPage adminUsersPage;
 	public ManageNewsPage manageNewsPage;
+	
 
 	@Test
-    @Parameters({"ValidUsername","ValidPassword"})  
+    @Parameters({"ValidUsername", "ValidPassword"}) 
 	public void enterNewsInfo(String username, String password) throws IOException {
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.signIn(username, password);
 		homePage = loginPage.clickSignIn();
-		homePage.clickManageNewsMoreInfo();
-		adminUsersPage.newButtonClick();
+		manageNewsPage=homePage.clickManageNewsMoreInfo();
+		manageNewsPage.newButtonClick();
 		String newsInfo = ExcelUtility.readStringData(1, 0, "NewsInfo");
 		manageNewsPage.enterNewsInfo(newsInfo);
-		assertTrue(adminUsersPage.isAdminUserInfoSaveandDeleteSuccess(), Constant.MESSAGEFORFAILEDSAVEORDELETE);
+		assertTrue(manageNewsPage.isSaveandDeleteSuccess(), Constant.MESSAGEFORFAILEDSAVEORDELETE);
 
 	}
 }
