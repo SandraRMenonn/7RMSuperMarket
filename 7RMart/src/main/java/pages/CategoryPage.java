@@ -20,7 +20,7 @@ import utility.WaitUtility;
 public class CategoryPage {
 
 	public WebDriver driver;
-	//WaitUtility waitUtilityPage=new WaitUtility();
+	WaitUtility waitUtility=new WaitUtility();
 	PageUtility pageUtility=new PageUtility();
 
 	public CategoryPage(WebDriver driver) {
@@ -55,11 +55,10 @@ public class CategoryPage {
 		enterCategoryField.sendKeys(categoryName);
 		selectGroups.click();
 		chooseFileButton.sendKeys(filePath);
-		WaitUtility waitUtilityPage=new WaitUtility();
-		waitUtilityPage.waitForElementToBeClickable(driver, saveAfterCategoryimageupload); 
+		waitUtility.waitForElementToBeClickable(driver, saveAfterCategoryimageupload); 
 	   // PageUtility pageUtility=new PageUtility();
 		//pageUtility.javaScriptExecutorToScrollDown(3000);
-		JavascriptExecutor exe = (JavascriptExecutor) driver;   
+		JavascriptExecutor exe = (JavascriptExecutor) driver;    // call this from page utility
 		exe.executeScript("window.scrollBy(0,3000)"); // scroll down
 		try {
 			Thread.sleep(2000);
@@ -93,14 +92,12 @@ public class CategoryPage {
 	}
 	
 	public CategoryPage newButtonClick() {
-		WaitUtility waitUtilityPage=new WaitUtility();
-		waitUtilityPage.waitForElementToBeClickable(driver, categoryNewButton);
+		waitUtility.waitForElementToBeClickable(driver, categoryNewButton);
 		categoryNewButton.click();
 		return this;
 	}
 	
 	public boolean isSaveandDeleteSuccess() {
-		PageUtility pageUtility = new PageUtility();
 		return pageUtility.isSaveandDeleteSuccess(saveandDeleteSuccessAlert);
 	}
 	

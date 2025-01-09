@@ -15,6 +15,7 @@ import utility.WaitUtility;
 public class HomePage {
 
 	public WebDriver driver;
+	WaitUtility waitUtility=new WaitUtility();
 	
 
 	public HomePage(WebDriver driver) {
@@ -44,15 +45,13 @@ public class HomePage {
 
 	public LoginPage logoutAction(String dropdownValue) {
 		settingsandLogoutdropdown.click();
-		WaitUtility waitUtilityPage=new WaitUtility();
-		waitUtilityPage.waitForElementToBeClickable(driver, logoutOption);  // explicit wait added to wait until logout option visible
+		waitUtility.waitForElementToBeClickable(driver, logoutOption);  // explicit wait added to wait until logout option visible
 		logoutOption.click();
 		return new LoginPage(driver);
 	}
 
 	public AdminUsersPage clickAdminUserMoreInfo() {
-		WaitUtility waitUtilityPage=new WaitUtility();
-		waitUtilityPage.waitForElementToBeClickable(driver, adminUserMoreInfo);
+		waitUtility.waitForElementToBeClickable(driver, adminUserMoreInfo);
 		adminUserMoreInfo.click();
 		return new AdminUsersPage(driver);
 	}

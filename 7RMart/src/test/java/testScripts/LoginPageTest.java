@@ -20,7 +20,7 @@ public class LoginPageTest extends Base {
 	/**** Parameterization ******/
 	@DataProvider(name = "Credentials")
 	public Object[][] testData() { // object is a class, testdata method name
-		Object data[][] = { { "admin", "admin" }, { "admin", "Obsqura" }, { "@#$", "admin" } }; // data variable name
+		Object data[][] = { { "admin", "admin" }, { "@#$", "admin" }, { "admin", "Ob@#$" } }; // data variable name
 		return data;
 	}
 

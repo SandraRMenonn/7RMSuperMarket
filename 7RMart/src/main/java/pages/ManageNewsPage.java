@@ -17,6 +17,7 @@ public class ManageNewsPage {
 
 	public WebDriver driver;
 	WaitUtility waitUtility=new WaitUtility();
+	PageUtility pageUtility = new PageUtility();
 
 	public ManageNewsPage(WebDriver driver) {
 		this.driver = driver;
@@ -46,7 +47,6 @@ public class ManageNewsPage {
 	}
 	
 	public boolean isSaveandDeleteSuccess() {
-		PageUtility pageUtility = new PageUtility();
 		return pageUtility.isSaveandDeleteSuccess(saveandDeleteSuccessAlert);
 	}
 

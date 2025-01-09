@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+<parameter name="ValidUsername" value="admin"></parameter>
+<parameter name="ValidPassword" value="admin"></parameter>
+	<test name="ChromeTest">
+		<parameter name="Browser" value="Chrome"></parameter>
+		<classes>
+			<class name="testScripts.AdminUsersPageTest" />
+			<class name="testScripts.CategoryTest" />
+			<class name="testScripts.HomePageTest" />
+			<class name="testScripts.ManageNewsTest" />
+			<class name="testScripts.LoginPageTest">
+				<!-- 	<methods>
+					<include name="verifyInvalidUserNameforLogin"></include>
+				</methods> -->
+			</class>
+
+
+		</classes>
+	</test>
+	<test name="EdgeTest">
+		<parameter name="Browser" value="Edge"></parameter>
+		<classes>
+			<class name="testScripts.AdminUsersPageTest" />
+			<class name="testScripts.CategoryTest" />
+			<class name="testScripts.HomePageTest" />
+			<class name="testScripts.ManageNewsTest" />
+			<class name="testScripts.LoginPageTest">
+				<!-- 	<methods>
+					<include name="verifyInvalidUserNameforLogin"></include>
+				</methods> -->
+			</class>
+		</classes>
+	</test>
+</suite>

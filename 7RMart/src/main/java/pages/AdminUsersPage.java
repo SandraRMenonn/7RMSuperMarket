@@ -18,7 +18,7 @@ import utility.WaitUtility;
 public class AdminUsersPage {
 
 	public WebDriver driver;
-	PageUtility pageUtility = new PageUtility();
+	PageUtility pageUtility=new PageUtility();
 	WaitUtility waitUtility=new WaitUtility();
 
 	public AdminUsersPage(WebDriver driver) {
@@ -80,7 +80,6 @@ public class AdminUsersPage {
 	}
 
 	public boolean searchAdminUser(String username, String userType) {
-		WaitUtility waitUtility=new WaitUtility();
 		waitUtility.waitForElementToBeClickable(driver, adminUserSearchButton);
 		adminUserSearchButton.click();
 		adminSearchUserName.sendKeys(username);

@@ -21,7 +21,6 @@ import utility.ExcelUtility;
 public class CategoryTest extends Base {
 
 	public HomePage homePage;
-	public AdminUsersPage adminUsersPage;
 	public CategoryPage categoryPage;
 
 	@Test(priority = 1)

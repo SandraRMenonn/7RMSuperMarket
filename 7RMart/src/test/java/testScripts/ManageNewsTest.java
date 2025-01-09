@@ -18,7 +18,6 @@ import utility.ExcelUtility;
 public class ManageNewsTest extends Base {
 
 	public HomePage homePage;
-	public AdminUsersPage adminUsersPage;
 	public ManageNewsPage manageNewsPage;
 	
 
