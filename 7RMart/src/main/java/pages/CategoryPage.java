@@ -20,8 +20,8 @@ import utility.WaitUtility;
 public class CategoryPage {
 
 	public WebDriver driver;
-	WaitUtility waitUtility=new WaitUtility();
-	PageUtility pageUtility=new PageUtility();
+	WaitUtility waitUtility = new WaitUtility();
+	PageUtility pageUtility = new PageUtility();
 
 	public CategoryPage(WebDriver driver) {
 		this.driver = driver;
@@ -55,10 +55,10 @@ public class CategoryPage {
 		enterCategoryField.sendKeys(categoryName);
 		selectGroups.click();
 		chooseFileButton.sendKeys(filePath);
-		waitUtility.waitForElementToBeClickable(driver, saveAfterCategoryimageupload); 
-	   // PageUtility pageUtility=new PageUtility();
-		//pageUtility.javaScriptExecutorToScrollDown(3000);
-		JavascriptExecutor exe = (JavascriptExecutor) driver;    // call this from page utility
+		waitUtility.waitForElementToBeClickable(driver, saveAfterCategoryimageupload);
+		// PageUtility pageUtility=new PageUtility();
+		// pageUtility.javaScriptExecutorToScrollDown(3000);
+		JavascriptExecutor exe = (JavascriptExecutor) driver; // call this from page utility
 		exe.executeScript("window.scrollBy(0,3000)"); // scroll down
 		try {
 			Thread.sleep(2000);
@@ -87,18 +87,18 @@ public class CategoryPage {
 
 	public CategoryPage deleteFromCategorySearchResult() {
 		deleteCategoryFromSearchResult.click();
-		driver.switchTo().alert().accept();
+		pageUtility.acceptAlert();
 		return this;
 	}
-	
+
 	public CategoryPage newButtonClick() {
 		waitUtility.waitForElementToBeClickable(driver, categoryNewButton);
 		categoryNewButton.click();
 		return this;
 	}
-	
+
 	public boolean isSaveandDeleteSuccess() {
 		return pageUtility.isSaveandDeleteSuccess(saveandDeleteSuccessAlert);
 	}
-	
+
 }

@@ -18,8 +18,8 @@ import utility.WaitUtility;
 public class AdminUsersPage {
 
 	public WebDriver driver;
-	PageUtility pageUtility=new PageUtility();
-	WaitUtility waitUtility=new WaitUtility();
+	PageUtility pageUtility = new PageUtility();
+	WaitUtility waitUtility = new WaitUtility();
 
 	public AdminUsersPage(WebDriver driver) {
 		this.driver = driver;
@@ -75,7 +75,7 @@ public class AdminUsersPage {
 
 	public AdminUsersPage deleteAdminUser() {
 		deleteAdminUserIcon.click();
-		driver.switchTo().alert().accept();
+		pageUtility.acceptAlert();
 		return this;
 	}
 
@@ -90,12 +90,9 @@ public class AdminUsersPage {
 		return isPaginationDisplayed;
 
 	}
-	
+
 	public boolean isSaveandDeleteSuccess() {
 		return pageUtility.isSaveandDeleteSuccess(SaveandDeleteSuccessAlert);
 	}
-	
-	
-	
 
 }

@@ -16,7 +16,7 @@ import utility.WaitUtility;
 public class ManageNewsPage {
 
 	public WebDriver driver;
-	WaitUtility waitUtility=new WaitUtility();
+	WaitUtility waitUtility = new WaitUtility();
 	PageUtility pageUtility = new PageUtility();
 
 	public ManageNewsPage(WebDriver driver) {
@@ -39,13 +39,13 @@ public class ManageNewsPage {
 		clickSaveButtonforNews.click();
 		return this;
 	}
-	
+
 	public ManageNewsPage newButtonClick() {
 		waitUtility.waitForElementToBeClickable(driver, manageNewsNewButton);
 		manageNewsNewButton.click();
 		return this;
 	}
-	
+
 	public boolean isSaveandDeleteSuccess() {
 		return pageUtility.isSaveandDeleteSuccess(saveandDeleteSuccessAlert);
 	}

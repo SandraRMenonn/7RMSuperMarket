@@ -3,28 +3,15 @@
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <parameter name="ValidPassword" value="admin"/>
   <parameter name="ValidUsername" value="admin"/>
-  <test thread-count="5" name="ChromeTest(failed)">
-    <parameter name="Browser" value="Chrome"/>
+  <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="testScripts.LoginPageTest">
+      <class name="testScripts.ManageNewsTest">
         <methods>
-          <include name="verifyValidCredentialsforLogin" invocation-numbers="1 1 1 2 2 2"/>
           <include name="afterMethod"/>
+          <include name="enterNewsInfo"/>
           <include name="beforeMethod"/>
         </methods>
-      </class> <!-- testScripts.LoginPageTest -->
+      </class> <!-- testScripts.ManageNewsTest -->
     </classes>
-  </test> <!-- ChromeTest(failed) -->
-  <test thread-count="5" name="EdgeTest(failed)">
-    <parameter name="Browser" value="Edge"/>
-    <classes>
-      <class name="testScripts.LoginPageTest">
-        <methods>
-          <include name="verifyValidCredentialsforLogin" invocation-numbers="1 1 1 2 2 2"/>
-          <include name="afterMethod"/>
-          <include name="beforeMethod"/>
-        </methods>
-      </class> <!-- testScripts.LoginPageTest -->
-    </classes>
-  </test> <!-- EdgeTest(failed) -->
+  </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

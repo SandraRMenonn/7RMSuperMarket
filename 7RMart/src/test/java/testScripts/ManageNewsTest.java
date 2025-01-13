@@ -19,15 +19,14 @@ public class ManageNewsTest extends Base {
 
 	public HomePage homePage;
 	public ManageNewsPage manageNewsPage;
-	
 
 	@Test
-    @Parameters({"ValidUsername", "ValidPassword"}) 
-	public void enterNewsInfo(String username, String password) throws IOException {
+	@Parameters({ "ValidUsername", "ValidPassword" })
+	public void VerifyCreatingNewsInfo(String username, String password) throws IOException {
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.signIn(username, password);
 		homePage = loginPage.clickSignIn();
-		manageNewsPage=homePage.clickManageNewsMoreInfo();
+		manageNewsPage = homePage.clickManageNewsMoreInfo();
 		manageNewsPage.newButtonClick();
 		String newsInfo = ExcelUtility.readStringData(1, 0, "NewsInfo");
 		manageNewsPage.enterNewsInfo(newsInfo);

@@ -5,22 +5,21 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.io.FileHandler;
 
 public class ScreenshotUtility {
-	
+
 	public void captureFailureScreenShot(WebDriver driver, String name) throws IOException {
 		// Interface & method for Capture Screenshot
-		TakesScreenshot scrShot = (TakesScreenshot) driver; //TakesScreenshot is an interface
+		TakesScreenshot scrShot = (TakesScreenshot) driver; // TakesScreenshot is an interface
 		File screenShot = scrShot.getScreenshotAs(OutputType.FILE); // screenshot will store in temporary path
 																	// "screenShot
 		File f1 = new File(System.getProperty("user.dir") + "\\OutputScreenshots");// Generating folder using Java
 																					// (user.dir) automatically folder
-		
+
 		if (!f1.exists()) {
 			f1.mkdirs();// mkdir --> will create folder using java make directory
 		}

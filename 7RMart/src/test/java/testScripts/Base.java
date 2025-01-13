@@ -11,7 +11,9 @@ import org.testng.annotations.Parameters;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -26,7 +28,7 @@ public class Base {
 	Properties properties;
 	FileInputStream fis;
 
-	@BeforeMethod
+	@BeforeMethod(alwaysRun = true)
 	@Parameters("Browser")
 	public void beforeMethod(String browser) throws Exception {
 		try {
@@ -41,25 +43,28 @@ public class Base {
 			driver = new ChromeDriver();
 		} else if (browser.equalsIgnoreCase("edge")) {
 			driver = new EdgeDriver();
-} else if (browser.equalsIgnoreCase("firefox")) {
+		} else if (browser.equalsIgnoreCase("firefox")) {
 			driver = new FirefoxDriver();
 		} else {
 			throw new Exception("invalid browser");
 		}
-		
-	//	driver = new ChromeDriver();
-	//	driver.get("https://groceryapp.uniqassosiates.com/admin/login");
+
+		// driver = new ChromeDriver();
+		// driver.get("https://groceryapp.uniqassosiates.com/admin/login");
 		driver.get(properties.getProperty("URL"));
 		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(20));
 
 	}
 
 	@AfterMethod
-	
+
 	public void afterMethod(ITestResult itResult) throws IOException {
-		
-		//Before the driver quit, it takes the screenshot, if TC failed. No screenshot will be taken even if there is a failure in between, only the final one is considered.
-		//i.e. current situation of the driver.
+
+		// Before the driver quit, it takes the screenshot, if TC failed. No screenshot
+		// will be taken even if there is a failure in between, only the final one is
+		// considered.
+		// i.e. current situation of the driver.
 		if (itResult.getStatus() == ITestResult.FAILURE) {
 			ScreenshotUtility sc = new ScreenshotUtility();
 			sc.captureFailureScreenShot(driver, itResult.getName());

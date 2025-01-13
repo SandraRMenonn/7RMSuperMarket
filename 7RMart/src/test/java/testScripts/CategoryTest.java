@@ -24,12 +24,12 @@ public class CategoryTest extends Base {
 	public CategoryPage categoryPage;
 
 	@Test(priority = 1)
-	@Parameters({"ValidUsername","ValidPassword"})
-	public void verifyCreateNewCategory(String username, String password) throws IOException {
+	@Parameters({ "ValidUsername", "ValidPassword" })
+	public void verifyCreatingNewCategory(String username, String password) throws IOException {
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.signIn(username, password);
-		homePage=loginPage.clickSignIn();
-		categoryPage=homePage.clickCategoryMoreInfo();
+		homePage = loginPage.clickSignIn();
+		categoryPage = homePage.clickCategoryMoreInfo();
 		categoryPage.newButtonClick();
 		String categoryName = ExcelUtility.readStringData(1, 0, "CategoryInfo");
 		String categoryFilePath = ExcelUtility.readStringData(1, 1, "CategoryInfo");
@@ -38,12 +38,12 @@ public class CategoryTest extends Base {
 	}
 
 	@Test(priority = 2)
-	@Parameters({"ValidUsername", "ValidPassword"})
+	@Parameters({ "ValidUsername", "ValidPassword" })
 	public void verifyCategorySearch(String username, String password) throws IOException {
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.signIn(username, password);
-		homePage=loginPage.clickSignIn();
-		categoryPage=homePage.clickCategoryMoreInfo();
+		homePage = loginPage.clickSignIn();
+		categoryPage = homePage.clickCategoryMoreInfo();
 		String categoryName = ExcelUtility.readStringData(1, 0, "CategoryInfo");
 		categoryPage.categorySearch(categoryName);
 		System.out.println(categoryPage.searchResultGetText(categoryName) + " and " + categoryName);
@@ -51,12 +51,12 @@ public class CategoryTest extends Base {
 	}
 
 	@Test(priority = 3)
-	@Parameters({"ValidUsername", "ValidPassword"})
-	public void verifyDeleteCategoryfromSearchResult(String username, String password) throws IOException {
+	@Parameters({ "ValidUsername", "ValidPassword" })
+	public void verifyDeletingCategoryfromSearchResult(String username, String password) throws IOException {
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.signIn(username, password);
-		homePage=loginPage.clickSignIn();
-		categoryPage=homePage.clickCategoryMoreInfo();
+		homePage = loginPage.clickSignIn();
+		categoryPage = homePage.clickCategoryMoreInfo();
 		String categoryName = ExcelUtility.readStringData(1, 0, "CategoryInfo");
 		categoryPage.categorySearch(categoryName);
 		categoryPage.deleteFromCategorySearchResult();

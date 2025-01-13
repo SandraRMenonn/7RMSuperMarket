@@ -21,25 +21,25 @@ public class AdminUsersPageTest extends Base {
 
 	public HomePage homePage;
 	public AdminUsersPage adminUsersPage;
-	FakerUtility faker=new FakerUtility();
+	FakerUtility faker = new FakerUtility();
 
 	@Test
 	@Parameters({ "ValidUsername", "ValidPassword" })
-	public void verifyAddNewAdminUser(String username, String password) throws IOException {
+	public void verifyCreatingNewAdminUser(String username, String password) throws IOException {
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.signIn(username, password);
 		homePage = loginPage.clickSignIn();
-		adminUsersPage=homePage.clickAdminUserMoreInfo();
+		adminUsersPage = homePage.clickAdminUserMoreInfo();
 		adminUsersPage.newButtonClick();
-		//String adminUsername=faker.getFakeFirstName(); // To Generate Random user names use this instead of excelread
+		// String adminUsername=faker.getFakeFirstName(); // To Generate Random user
+		// names use this instead of excelread
 		String adminUsername = ExcelUtility.readStringData(1, 0, "AdminUserPage");
 		String adminpassword = ExcelUtility.readStringData(1, 1, "AdminUserPage");
 		String adminUserType = ExcelUtility.readStringData(1, 2, "AdminUserPage");
 		adminUsersPage.inputAdminUsernameandPassword(adminUsername, adminpassword);
 		adminUsersPage.selectAdminUserType(adminUserType);
 		adminUsersPage.clickSaveAdminUserInfo();
-		assertTrue(adminUsersPage.isSaveandDeleteSuccess(),Constant.MESSAGEFORFAILEDSAVEORDELETE);
-		
+		assertTrue(adminUsersPage.isSaveandDeleteSuccess(), Constant.MESSAGEFORFAILEDSAVEORDELETE);
 
 	}
 
@@ -49,7 +49,7 @@ public class AdminUsersPageTest extends Base {
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.signIn(username, password);
 		homePage = loginPage.clickSignIn();
-		adminUsersPage=homePage.clickAdminUserMoreInfo();
+		adminUsersPage = homePage.clickAdminUserMoreInfo();
 		String adminUsername = ExcelUtility.readStringData(1, 0, "AdminUserPage");
 		String adminUserType = ExcelUtility.readStringData(1, 2, "AdminUserPage");
 		assertTrue(adminUsersPage.searchAdminUser(adminUsername, adminUserType));
@@ -57,11 +57,11 @@ public class AdminUsersPageTest extends Base {
 
 	@Test
 	@Parameters({ "ValidUsername", "ValidPassword" })
-	public void verifyToDeleteAdminUser(String username, String password) {
+	public void verifyDeletingAdminUser(String username, String password) {
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.signIn(username, password);
 		homePage = loginPage.clickSignIn();
-		adminUsersPage=homePage.clickAdminUserMoreInfo();
+		adminUsersPage = homePage.clickAdminUserMoreInfo();
 		adminUsersPage.deleteAdminUser();
 		assertTrue(adminUsersPage.isSaveandDeleteSuccess(), Constant.MESSAGEFORFAILEDSAVEORDELETE);
 	}
